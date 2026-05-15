@@ -83,7 +83,7 @@ export default function Dashboard() {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="text-2xl font-bold text-purple-600">CoachFlow</div>
+            <div className="text-2xl font-bold text-purple-600">Plumeo</div>
             <div className={`px-3 py-1 rounded-full text-xs font-medium ${automationActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
               {automationActive ? 'Automazione Attiva' : 'Automazione Pausata'}
             </div>

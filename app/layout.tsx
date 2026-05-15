@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CoachFlow - Automazione per Coach",
+  title: "Plumeo - Automazione per Coach",
   description: "Automatizza email e WhatsApp in 30 secondi",
 };
 

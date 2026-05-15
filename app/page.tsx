@@ -22,7 +22,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative z-10">
         <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
-          <div className="text-2xl font-bold text-white">CoachFlow</div>
+          <div className="text-2xl font-bold text-white">Plumeo</div>
           <button
             onClick={() => router.push('/login')}
             className="bg-white/10 backdrop-blur border border-white/20 text-white px-6 py-2 rounded-lg hover:bg-white/20 transition"
