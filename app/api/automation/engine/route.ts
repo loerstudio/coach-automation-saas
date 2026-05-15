@@ -156,7 +156,7 @@ export async function GET(request: Request) {
             totalEmailsSent: (automation.totalEmailsSent || 0) + emailsSent,
             totalWhatsappSent: (automation.totalWhatsappSent || 0) + whatsappSent,
             lastRunAt: new Date(),
-            nextRunAt: new Date(Date.now() + automation.checkInterval * 60 * 1000),
+            nextRunAt: new Date(Date.now() + (automation.checkInterval || 15) * 60 * 1000),
             updatedAt: new Date()
           })
           .where(eq(automations.id, automation.id))
