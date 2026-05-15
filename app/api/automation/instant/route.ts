@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import twilio from 'twilio'
 import { Resend } from 'resend'
-import Airtable from 'airtable'
 
 // Initialize services - ALL INSTANT, NO APPROVAL NEEDED!
 const twilioClient = twilio(
@@ -11,10 +10,6 @@ const twilioClient = twilio(
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
-  process.env.AIRTABLE_BASE_ID!
-)
-
 export async function POST(request: Request) {
   try {
     const { userId } = await request.json()
@@ -22,16 +17,18 @@ export async function POST(request: Request) {
     let emailsSent = 0
     let whatsappSent = 0
 
-    // Read from Airtable (instant, no OAuth!)
-    const records = await base('Contacts').select({
-      filterByFormula: "{Status} = 'To Contact'"
-    }).all()
+    // Mock data for demo - replace with real database
+    const mockContacts = [
+      {
+        name: 'Mario Rossi',
+        email: 'mario@example.com',
+        phone: '+393331234567',
+        message: 'Ciao Mario! Messaggio di test dal sistema di automazione.'
+      }
+    ]
 
-    for (const record of records) {
-      const name = record.get('Name') as string
-      const email = record.get('Email') as string
-      const phone = record.get('Phone') as string
-      const message = record.get('Message') as string || `Hi ${name}, this is your coach reaching out!`
+    for (const contact of mockContacts) {
+      const { name, email, phone, message } = contact
 
       // Send Email with Resend (instant!)
       if (email) {
@@ -63,11 +60,8 @@ export async function POST(request: Request) {
         }
       }
 
-      // Update Airtable record
-      await base('Contacts').update(record.id, {
-        'Status': 'Contacted',
-        'Last Contact': new Date().toISOString()
-      })
+      // In real app: update database status
+      console.log(`✅ Contact ${name} processed successfully`)
     }
 
     return NextResponse.json({
